@@ -1,0 +1,22 @@
+#upload-img img {
+    border: 1px solid #0c5460;
+    padding: 10px;
+    max-height: 300px;
+    max-width: 300px;
+    margin: 10px;
+}
+
+.delete-message {
+    position: relative;
+    top: 100px;
+}
+
+#delete-button {
+    position: relative;
+    top: 50px;
+}
+
+.seller-product-img {
+    max-height: 300px;
+    width: auto;
+}

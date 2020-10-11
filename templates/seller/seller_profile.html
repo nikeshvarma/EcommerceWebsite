@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    <title>Products Inventory</title>
+{% endblock title %}
+
+
+{% block navbar %}
+    {% include 'base/seller_navbar.html' %}
+{% endblock navbar %}
+
+{% block sidebar %}
+    {% include 'base/seller_sidebar.html' %}
+{% endblock sidebar %}
+
+{% block content %}
+    {% if messages %}
+        {% include 'base/messages.html' %}
+    {% endif %}
+
+    <div class="card vh-100">
+        <div class="card-header">
+            <h6 class="display-4">Seller Profile</h6>
+        </div>
+        <div class="card-body">
+            <div class="col-12">
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}

@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    <title>Seller Registration</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1 class="display-4">Let's Start Your Own E-Shop With Us.</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-8 p-3">
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-primary" type="submit" value="Next"/>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

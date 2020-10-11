@@ -1,0 +1,140 @@
+#home-side-img img {
+    max-height: 100px;
+    max-width: 100px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.nav-side {
+    position: absolute;
+    margin-left: 70px;
+}
+
+.search-h1 {
+    position: relative;
+    top: -42px;
+    left: 100px;
+}
+
+.search-list {
+    height: 70px;
+}
+
+.search-img {
+    top: -5px;
+    position: relative;
+    height: 50px;
+    width: content-box;
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.searchbar {
+    margin-left: auto;
+    max-width: 350px;
+}
+
+.dropdown-toggle::after {
+    content: none !important;
+}
+
+#search-anchor .list-group-item:hover {
+    background-color: lightblue;
+    color: black;
+}
+
+.anchor-class {
+    text-decoration: none !important;
+    color: black !important;
+}
+
+.anchor-class :hover {
+    text-decoration: none !important;
+    color: skyblue;
+}
+
+.box-hover {
+    transition: transform 0.5s;
+}
+
+.box-hover:hover {
+    /* box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.2), 20px 10px 20px 10px rgba(0, 0, 0, 0.2) !important; */
+    -ms-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.home-card-img {
+    position: relative;
+    height: 150px;
+    width: content-box;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.active-link {
+    background-color: orangered;
+    text-decoration-color: black;
+}
+
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.navbar-link {
+    margin-left: auto;
+}
+
+.nav-hover a:hover {
+    background-color: orangered;
+    text-decoration-color: black;
+}
+
+@media (max-width: 480px) {
+    .home-card-img {
+        position: relative;
+        height: 90px;
+        width: content-box;
+        padding: 10px;
+        margin: 0 auto;
+    }
+}
+
+.img-card {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.detail-page-img {
+    padding: 10px;
+    height: 380px;
+    width: auto;
+    max-width: 500px;
+    position: relative;
+    border: 1px solid #f0f0f0;
+}
+
+#search-result {
+    top: 60px;
+    left: 250px;
+    width: 600px;
+    position: absolute;
+}
+
+@media (max-width: 480px) {
+    #search-result {
+        top: 105px;
+        left: 5px;
+        width: 340px;
+        position: absolute;
+    }
+}
+
+.page-footer ul li {
+    font-size: 18px;
+}

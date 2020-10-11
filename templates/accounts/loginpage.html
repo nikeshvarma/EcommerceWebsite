@@ -1,0 +1,51 @@
+{% extends "base/base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}
+    <title>Login | OnlineStore.com</title>
+{% endblock title %}
+
+{% block content %}
+
+    {% if messages %}
+        {% include 'base/messages.html' %}
+    {% endif %}
+
+    {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible fade show">
+            <p>Your email and password didn't match. Please try again.</p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+                please login with an account that has access.</p>
+        {% else %}
+            <p>Please login to see this page.</p>
+        {% endif %}
+    {% endif %}
+
+    <form method="post" action="{% url 'login_page' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username|add_class:"form-control" }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password|add_class:"form-control" }}</td>
+            </tr>
+        </table>
+
+        <input type="submit" class="btn btn-success" value="Login">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+    <p><a href="{% url 'reset_password' %}">Lost password?</a></p>
+
+{% endblock %}

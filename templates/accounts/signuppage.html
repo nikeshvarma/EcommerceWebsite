@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}
+    <title>Sign Up | OnlineStore.com</title>
+{% endblock title %}
+
+{% block content %}
+
+    {% if messages %}
+        {% include 'base/messages.html' %}
+    {% endif %}
+
+    <form method="post" action="{% url 'signup_page' %}">
+        {% csrf_token %}
+        {% for field in form %}
+            <table>
+                <tr>
+                    <td>{{ field.label_tag }}</td>
+                    <td>{{ field|add_class:"form-control" }}</td>
+                </tr>
+            </table>
+        {% endfor %}
+
+        <input type="submit" class="btn btn-success" value="Create New Account">
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+
+    <p><a href="{% url 'reset_password' %}">Lost password?</a></p>
+
+{% endblock %}

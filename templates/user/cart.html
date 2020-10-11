@@ -1,0 +1,90 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Cart</title>
+{% endblock title %}
+
+{% block content %}
+    <div>
+
+        <div class="card">
+            <div class="card-header">
+                {% if cart_items %}
+                    <h4>Cart ({{ cart_items.count }})</h4>
+                {% else %}
+                    <h4>Cart</h4>
+                {% endif %}
+            </div>
+
+            {% if cart_items %}
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-8 p-0">
+                            {% for item in cart_items %}
+                                <div class="cart-body">
+
+                                    <div class="row no-gutters">
+
+                                        <div id="cart-item" class="col-4 col-md-3 col-lg-2">
+                                            <img src="{{ item.cart_item.product_home_img.url }}" alt="{{ item.cart_item.product_name }}"/>
+                                        </div>
+
+                                        <div class="col-8 col-md-9 col-lg-10">
+                                            <div>
+                                                <h5>{{ item.cart_item.product_name }}</h5>
+                                                <h5>&#x20B9; {{ item.cart_item.product_selling_price }}</h5>
+                                            </div>
+
+                                            <div>
+                                                <h6>
+                                                    Quantity:
+                                                    <button class="btn btn-success rounded-circle" onclick="changeQuantity({{ item.cart_item.id }}, 'increment')">+</button>
+                                                    <input class="text-center" type="text" value="{{ item.quantity }}" size="1" disabled/>
+                                                    <button class="btn btn-danger quantity rounded-circle" onclick="changeQuantity({{ item.cart_item.id }}, 'decrement')">&ndash;</button>
+                                                </h6>
+                                            </div>
+
+                                            <div>
+                                                <button onclick="removeCartItem({{ item.cart_item.id }})" class="btn btn-outline-danger">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="col-12 col-md-4 p-0">
+                            <div class="card">
+                                <div class="card-header" style="font-family: 'Noto Sans',sans-serif"><h4>PRICE DETAILS</h4></div>
+                                <div class="card-body">
+                                    <div id="cart-price" class="d-flex">
+                                        <div class="text-left">Price ({{ cart_items.count }} item)</div>
+                                        <div class="ml-auto">&#x20B9; {{ cart_price }}</div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="#" class="float-right btn btn-warning">PROCEED TO BUY</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            {% else %}
+
+                <div class="text-center vertical-line vh-100">
+                    <img src="{% static 'img/logo/shopping-cart.png' %}" height="180" width="180" class="cart-img">
+                    <h3><strong>Your Cart is Empty</strong></h3>
+                    <h4>Add something to make me happy :)</h4>
+                    <a href="{% url 'home_page' %}" class="btn btn-primary m-3">Continue Shopping</a>
+                </div>
+
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}

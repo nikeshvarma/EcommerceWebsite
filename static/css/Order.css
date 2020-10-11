@@ -1,0 +1,8 @@
+#address-row {
+    justify-content: center;
+}
+
+#address-box {
+    padding: 10px;
+    border: 1px solid black;
+}

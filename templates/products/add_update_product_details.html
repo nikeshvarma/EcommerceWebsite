@@ -1,0 +1,58 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+    <title>Update Phone Details</title>
+{% endblock title %}
+
+{% block navbar %}
+    {% include 'base/seller_navbar.html' %}
+{% endblock navbar %}
+
+{% block sidebar %}
+    {% include 'base/seller_sidebar.html' %}
+{% endblock sidebar %}
+
+{% block content %}
+    <div>
+        <div class="row">
+
+            <div class="col-12 col-md-4">
+                <div class="card m-2">
+                    <div class="card-body shadow-sm">
+                        <p>
+                            Here you can update the details of product.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card m-2">
+                    <div class="card-body shadow-sm">
+                        <p>
+                            Here you can update the details of product.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8">
+                <div class="card m-2">
+                    <div class="card-header">
+                        <small class="display-4">Update Details</small>
+                    </div>
+                    <div class="card-body shadow-sm">
+                        <form class="form-group" method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <input type="submit" class="btn btn-primary float-right" value="Update"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}

@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+    <title>List Products</title>
+{% endblock title %}
+
+{% block navbar %}
+    {% include 'base/seller_navbar.html' %}
+{% endblock navbar %}
+
+{% block sidebar %}
+    {% include 'base/seller_sidebar.html' %}
+{% endblock sidebar %}
+
+{% block content %}
+
+    {% if messages %}
+        {% include 'base/messages.html' %}
+    {% endif %}
+
+    <div class="mt-2">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class=" shadow-sm p-3 mb-3 bg-white rounded card">
+                    <div class="card-body">
+                        <h6 class="card-title">WELCOME <br> <br class="line"> {{ user }}</h6>
+                    </div>
+                </div>
+
+                <div class=" shadow-sm p-3 mb-3 bg-white rounded card">
+                    <div class="card-body">
+                        <div>
+                            <img class="img-fluid seller-product-img" src="{{ image.url }}" alt="{{ image.name }}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-8">
+                <div class="card shadow-sm p-3 mb-5 bg-white rounded">
+                    <div class="card-header">
+                        <p class="display-4">Update List Product</p>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <button type="submit" class="btn btn-primary float-right">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}

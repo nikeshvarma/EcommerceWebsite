@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    <title>Delete Confirmation</title>
+{% endblock title %}
+
+{% block navbar %}
+
+{% endblock navbar %}
+
+
+{% block sidebar %}
+
+{% endblock sidebar %}
+
+
+{% block content %}
+    <div align="center" class="delete-message">
+        <form method="post">
+            {% csrf_token %}
+            <p class="display-4">Are you sure you want to delete "{{ object.product_name }}"?</p>
+            <input id="delete-button" class="btn btn-danger" type="submit" value="Confirm">
+        </form>
+    </div>
+{% endblock content %}
+
+{% block footer %}
+
+{% endblock footer %}
