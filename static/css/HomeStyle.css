@@ -49,17 +49,20 @@
     color: black !important;
 }
 
+.card-padding {
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
 .anchor-class :hover {
     text-decoration: none !important;
-    color: skyblue;
 }
 
 .box-hover {
-    transition: transform 0.5s;
+    transition: transform 0.3s;
 }
 
 .box-hover:hover {
-    /* box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.2), 20px 10px 20px 10px rgba(0, 0, 0, 0.2) !important; */
     -ms-transform: scale(1.05);
     -webkit-transform: scale(1.05);
     transform: scale(1.05);

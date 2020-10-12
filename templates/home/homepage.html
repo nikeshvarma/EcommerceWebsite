@@ -27,4 +27,34 @@
         </a>
     </div>
 
+    <div>
+        <div class="row">
+
+            <div class="col-12 p-3 m-2 shadow-sm card-header"><h4><b>Latest Products</b></h4></div>
+
+            <div class="col-12">
+                <div class="row mb-2">
+
+                    {% for product in latest_products %}
+
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-2">
+                            <a href="#" class="anchor-class">
+                                <div class="card box-hover card-padding">
+                                    <img class="home-card-img" src="{{ product.product_home_img.url }}" alt="{{ product.product_name }}">
+                                    <div class="card-body text-center">
+                                        <h6 class="text-overflow">{{ product.product_name }}</h6>
+                                        <p class="text-success">Rs. {{ product.product_selling_price }}</p>
+                                        <p class="text-secondary">{{ product.product_type }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock content %}
