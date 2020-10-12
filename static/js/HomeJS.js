@@ -31,3 +31,27 @@ function searchQuery(event) {
         }
     })
 }
+
+
+function updateCart(id, action) {
+    if (user != 'AnonymousUser') {
+        updateUserCart(id, action);
+    } else {
+        console.log('update cart', id, action, user)
+    }
+}
+
+function updateUserCart(id, action) {
+    $.ajax({
+        url: '/user/update-cart/',
+        method: 'POST',
+        dataType: 'json',
+        data: {'id': id, 'action': action},
+        success: function (data) {
+            console.log(data);
+            const cartButton = $('#add-to-cart');
+            cartButton.text('Go To Cart');
+            cartButton.attr('href', '/user/cart/');
+        }
+    })
+}

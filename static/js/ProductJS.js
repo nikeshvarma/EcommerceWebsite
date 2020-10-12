@@ -15,30 +15,6 @@ function getCookie(name) {
 
 const csrftoken = getCookie('csrftoken');
 
-// Live status
-$('input[name=live_checkbox]').change(
-    function () {
-        if (this.checked) {
-            $.ajax({
-                url: '/product/product-live/',
-                headers: {"X-CSRFToken": csrftoken},
-                method: 'POST',
-                dataType: 'json',
-                data: {'pk': this.value, 'checked': true},
-            })
-        } else {
-            $.ajax({
-                url: '/product/product-live/',
-                headers: {"X-CSRFToken": csrftoken},
-                method: 'POST',
-                dataType: 'json',
-                data: {'pk': this.value, 'checked': false},
-            })
-        }
-    }
-);
-
-
 // Category Type Filter
 function addProductTypes(data) {
     data = JSON.parse(data);

@@ -114,11 +114,12 @@
 }
 
 .detail-page-img {
-    padding: 10px;
-    height: 380px;
-    width: auto;
-    max-width: 500px;
     position: relative;
+    height: 300px;
+    width: content-box;
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
     border: 1px solid #f0f0f0;
 }
 

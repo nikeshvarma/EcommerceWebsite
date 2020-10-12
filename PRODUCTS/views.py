@@ -99,6 +99,7 @@ class ProductDetailUpdateView(UpdateView):
         else:
             return HttpResponse("You don't have access to this page...")
 
+    # Always modified it after adding a new product type
     def get_form_class(self):
         category = self.kwargs['category']
         if category == 'Mobiles':

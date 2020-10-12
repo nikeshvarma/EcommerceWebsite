@@ -1,7 +1,6 @@
 // calling functions
 document.getElementById('id_password2').addEventListener('keyup', checkPassword);
 document.getElementById('id_password1').addEventListener('keyup', checkPassword);
-
 document.getElementById('id_email').addEventListener('change', checkEmail);
 
 
@@ -40,15 +39,4 @@ function checkEmail() {
             }
         }
     };
-}
-
-function send_otp() {
-    let number = $('#id_phone_number').val();
-
-    $.ajax({
-        url: '/user/otp-verification/',
-        method: 'GET',
-        dataType: 'json',
-        data: {'phone_number': number},
-    })
 }

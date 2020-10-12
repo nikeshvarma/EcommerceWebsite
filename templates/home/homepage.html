@@ -38,7 +38,7 @@
                     {% for product in latest_products %}
 
                         <div class="col-6 col-sm-6 col-md-4 col-lg-2">
-                            <a href="#" class="anchor-class">
+                            <a href="{% url 'product_detail_page' product.product_type product.product_name product.id %}" class="anchor-class">
                                 <div class="card box-hover card-padding">
                                     <img class="home-card-img" src="{{ product.product_home_img.url }}" alt="{{ product.product_name }}">
                                     <div class="card-body text-center">

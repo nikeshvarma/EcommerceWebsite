@@ -1,0 +1,83 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    <title>OnlineStore.com | Home</title>
+{% endblock title %}
+
+{% block content %}
+
+    {% if messages %}
+        {% include 'base/messages.html' %}
+    {% endif %}
+
+
+    <div class="bg-light">
+        <div class="row no-gutters pt-3">
+            <div class="d-none d-md-none d-lg-block col-md-1 text-center ml-3">
+                {% for image in product_images %}
+                    <div class="img-thumbnail">
+                        <div id="home-side-img">
+                            <img src="{{ image.images.url }}" alt="{{ product.product_name }}"
+                                 onclick="changeImage(this.src)">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body img-card">
+                        <div id="main-img">
+                            <img src="{{ product.product_home_img.url }}" class="detail-page-img"
+                                 alt="{{ product.product_name }}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="img-card">
+                            <a id="add-to-cart" type="button" onclick="updateCart({{ product.id }}, 'add')" class="btn btn-outline-primary m-3">ADD TO CART</a>
+                            <button type="button" class="btn btn-outline-success m-3">BUY NOW</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-body shadow-sm bg-light">
+                        <div class="ml-5">
+                            <div>
+                                <h4>{{ product.product_name }}</h4>
+                            </div>
+                            <div>
+                                <h5>{{ details }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock content %}
+
+{% block footer %}
+
+    <script>
+        window.onload = function () {
+            $.ajax({
+                url: '/user/check-cart/',
+                method: 'GET',
+                dataType: 'json',
+                data: {'id': {{product.id}}},
+                success: function (status) {
+                    if (status == 'found') {
+                        const cartButton = $('#add-to-cart');
+                        cartButton.text('Go To Cart');
+                        cartButton.attr('href', '/user/cart/');
+                    }
+                }
+            })
+        };
+    </script>
+
+{% endblock footer %}
