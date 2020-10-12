@@ -1,3 +1,9 @@
+function reload() {
+    setTimeout(function () {
+        location.reload();
+    }, 100)
+}
+
 function changeImage(_src) {
     var imgDiv = document.getElementById('main-img');
     var imageElement = imgDiv.getElementsByTagName('img')[0];
@@ -37,7 +43,7 @@ function updateCart(id, action) {
     if (user != 'AnonymousUser') {
         updateUserCart(id, action);
     } else {
-        console.log('update cart', id, action, user)
+        updateSessionCart(id, action)
     }
 }
 
@@ -47,11 +53,23 @@ function updateUserCart(id, action) {
         method: 'POST',
         dataType: 'json',
         data: {'id': id, 'action': action},
-        success: function (data) {
-            console.log(data);
+        success: function () {
             const cartButton = $('#add-to-cart');
             cartButton.text('Go To Cart');
             cartButton.attr('href', '/user/cart/');
         }
     })
 }
+
+function updateSessionCart(id, action) {
+    $.ajax({
+        url: '/user/session-cart/',
+        method: 'POST',
+        dataType: 'json',
+        data: {'id': id, 'action': action},
+        success: function (data) {
+            console.log(data['message'])
+        }
+    })
+}
+

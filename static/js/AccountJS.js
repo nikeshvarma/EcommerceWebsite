@@ -6,8 +6,8 @@ document.getElementById('id_email').addEventListener('change', checkEmail);
 
 // password match function
 function checkPassword() {
-    pass1 = document.getElementById('id_password1').value;
-    pass2 = document.getElementById('id_password2').value;
+    var pass1 = document.getElementById('id_password1').value;
+    var pass2 = document.getElementById('id_password2').value;
     var message = document.getElementById('massage');
     if (pass1 === pass2) {
         message.className = 'd-none';
