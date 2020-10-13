@@ -1,11 +1,13 @@
-from django.utils.translation import ugettext as _
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import LoginView
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
-from django.contrib.auth import logout, login, authenticate
+from django.shortcuts import redirect
+from django.contrib.auth import logout, login
+from django.urls import reverse
 from django.views.generic import FormView
+
+from USER.models import UserCart
 from .forms import SignUpForm
 
 User = get_user_model()
@@ -13,6 +15,12 @@ User = get_user_model()
 
 class Login(LoginView):
     template_name = 'accounts/loginpage.html'
+
+    def get_success_url(self):
+        # cart = self.request.session.get('cart', False)
+        # if cart:
+        #     UserCart.objects.get_or_create()
+        return reverse('home_page')
 
 
 class SignUp(FormView):
