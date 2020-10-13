@@ -43,7 +43,7 @@ function updateCart(id, action) {
     if (user != 'AnonymousUser') {
         updateUserCart(id, action);
     } else {
-        updateSessionCart(id, action)
+        updateSessionCart(id, action);
     }
 }
 
@@ -67,8 +67,10 @@ function updateSessionCart(id, action) {
         method: 'POST',
         dataType: 'json',
         data: {'id': id, 'action': action},
-        success: function (data) {
-            console.log(data['message'])
+        success: function () {
+            const cartButton = $('#add-to-cart');
+            cartButton.text('Go To Cart');
+            cartButton.attr('href', '/user/cart/');
         }
     })
 }

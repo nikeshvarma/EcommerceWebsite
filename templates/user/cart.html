@@ -6,74 +6,129 @@
 {% endblock title %}
 
 {% block content %}
+
+    {% if messages %}
+        {% include 'base/messages.html' %}
+    {% endif %}
+
     <div>
         <div class="card">
 
             <div class="card-header">
-                {% if cart_items %}
-                    <h4>Cart ({{ cart_items.count }})</h4>
-                {% else %}
-                    <h4>Cart</h4>
-                {% endif %}
+                <h6 class="display-5">Cart</h6>
             </div>
-
-            {% if messages %}
-                {% include 'base/messages.html' %}
-            {% endif %}
 
             {% if cart_items %}
 
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-8 p-0">
+                {% if request.user.is_authenticated %}
 
-                            {% for item in cart_items %}
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-md-8 p-0">
 
-                                <div class="cart-body">
-                                    <div class="row no-gutters">
-                                        <div id="cart-item" class="col-4 col-md-3 col-lg-2">
-                                            <img src="{{ item.cart_item.product_home_img.url }}" alt="{{ item.cart_item.product_name }}"/>
-                                        </div>
-                                        <div class="col-8 col-md-9 col-lg-10">
-                                            <div>
-                                                <h5>{{ item.cart_item.product_name }}</h5>
-                                                <h5>&#x20B9; {{ item.cart_item.product_selling_price }}</h5>
+                                {% for item in cart_items %}
+
+                                    <div class="cart-body">
+                                        <div class="row no-gutters">
+                                            <div id="cart-item" class="col-4 col-md-3 col-lg-2">
+                                                <img src="{{ item.cart_item.product_home_img.url }}" alt="{{ item.cart_item.product_name }}"/>
                                             </div>
-                                            <div>
-                                                <h6>
-                                                    Quantity:
-                                                    <button class="btn btn-success rounded-circle" onclick="updateCart({{ item.cart_item.id }}, 'increment'); reload();">+</button>
-                                                    <input class="text-center" type="text" value="{{ item.quantity }}" size="1" disabled/>
-                                                    <button class="btn btn-danger quantity rounded-circle" onclick="updateCart({{ item.cart_item.id }}, 'decrement'); reload();">&ndash;</button>
-                                                </h6>
-                                            </div>
-                                            <div>
-                                                <button onclick="updateCart({{ item.cart_item_id }}, 'remove'); reload();" class="btn btn-outline-danger">Remove</button>
+                                            <div class="col-8 col-md-9 col-lg-10">
+                                                <div>
+                                                    <h5>{{ item.cart_item.product_name }}</h5>
+                                                    <h5>&#x20B9; {{ item.cart_item.product_selling_price }}</h5>
+                                                </div>
+                                                <div>
+                                                    <h6>
+                                                        Quantity:
+                                                        <button class="btn btn-success rounded-circle" onclick="updateCart({{ item.cart_item.id }}, 'increment'); reload();">+</button>
+                                                        <input class="text-center" type="text" value="{{ item.quantity }}" size="1" disabled/>
+                                                        <button class="btn btn-danger quantity rounded-circle" onclick="updateCart({{ item.cart_item.id }}, 'decrement'); reload();">&ndash;</button>
+                                                    </h6>
+                                                </div>
+                                                <div>
+                                                    <button onclick="updateCart({{ item.cart_item_id }}, 'remove'); reload();" class="btn btn-outline-danger">Remove</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            {% endfor %}
+                                {% endfor %}
 
-                        </div>
+                            </div>
 
-                        <div class="col-12 col-md-4 p-0">
-                            <div class="card">
-                                <div class="card-header" style="font-family: 'Noto Sans',sans-serif"><h4>PRICE DETAILS</h4></div>
-                                <div class="card-body">
-                                    <div id="cart-price" class="d-flex">
-                                        <div class="text-left">Price ({{ cart_items.count }} item)</div>
-                                        <div class="ml-auto">&#x20B9; {{ amount }}</div>
+                            <div class="col-12 col-md-4 p-0">
+                                <div class="card">
+                                    <div class="card-header" style="font-family: 'Noto Sans',sans-serif"><h4>PRICE DETAILS</h4></div>
+                                    <div class="card-body">
+                                        <div id="cart-price" class="d-flex">
+                                            <div class="text-left">Price ({{ cart_items.count }} item)</div>
+                                            <div class="ml-auto">&#x20B9; {{ amount }}</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="card-footer">
-                                    <a href="#" class="float-right btn btn-warning">PROCEED TO BUY</a>
+                                    <div class="card-footer">
+                                        <a href="#" class="float-right btn btn-warning">PROCEED TO BUY</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                {% else %}
+
+                    <div class="card-body vh-100">
+                        <div class="row">
+                            <div class="col-12 col-md-8 p-0">
+
+                                {% for item, quantity in cart_items.items %}
+
+                                    <div class="cart-body">
+                                        <div class="row no-gutters">
+                                            <div id="cart-item" class="col-4 col-md-3 col-lg-2">
+                                                <img src="{{ item.product_home_img.url }}" alt="{{ item.product_name }}"/>
+                                            </div>
+                                            <div class="col-8 col-md-9 col-lg-10">
+                                                <div>
+                                                    <h5>{{ item.product_name }}</h5>
+                                                    <h5>&#x20B9; {{ item.product_selling_price }}</h5>
+                                                </div>
+                                                <div>
+                                                    <h6>
+                                                        Quantity:
+                                                        <button class="btn btn-success rounded-circle" onclick="updateCart({{ item.id }}, 'increment'); reload();">+</button>
+                                                        <input class="text-center" type="text" value="{{ quantity }}" size="1" disabled/>
+                                                        <button class="btn btn-danger quantity rounded-circle" onclick="updateCart({{ item.id }}, 'decrement'); reload();">&ndash;</button>
+                                                    </h6>
+                                                </div>
+                                                <div>
+                                                    <button onclick="updateCart({{ item.id }}, 'remove'); reload();" class="btn btn-outline-danger">Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                            <div class="col-12 col-md-4 p-0">
+                                <div class="card">
+                                    <div class="card-header" style="font-family: 'Noto Sans',sans-serif"><h4>PRICE DETAILS</h4></div>
+                                    <div class="card-body">
+                                        <div id="cart-price" class="d-flex">
+                                            <div class="text-left">Total Amount</div>
+                                            <div class="ml-auto">&#x20B9; {{ amount }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="#" class="float-right btn btn-warning">PROCEED TO BUY</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
 
             {% else %}
 
@@ -87,6 +142,8 @@
             {% endif %}
         </div>
     </div>
+
+
 {% endblock content %}
 
 {% block footer %}

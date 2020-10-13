@@ -64,6 +64,8 @@ ROOT_URLCONF = 'EcommerceWebsite.urls'
 # CUSTOM USER MODEL
 AUTH_USER_MODEL = 'ACCOUNTS.AuthUser'
 
+SESSION_SAVE_EVERY_REQUEST = True
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

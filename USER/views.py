@@ -36,10 +36,15 @@ class CartView(TemplateView):
             context = {'cart_items': items, 'amount': billing_amount}
             return context
         else:
-            items = self.request.session['cart']
-            print(items)
-            context = {}
-            return context
+            items = self.request.session.get('cart', False)
+            if items:
+                cart_items = {Product.objects.get(id=key): value for key, value in items.items()}
+                amount = sum([item.product_selling_price * quantity for item, quantity in cart_items.items()])
+                context = {'cart_items': cart_items, 'amount': amount}
+                return context
+            else:
+                context = {}
+                return context
 
 
 @csrf_exempt
@@ -81,20 +86,41 @@ def update_session_cart(request):
             request.session['cart'] = {productID: 1}
         else:
             cart = request.session['cart']
-            cart[productID] = 1
-        return JsonResponse({'message': 'item added'})
+            cart.update({productID: 1})
+        return JsonResponse({'message': 'item added'}, status=200)
 
     if action == 'remove':
         cart = request.session['cart']
+        cart.pop(productID)
+        return JsonResponse({'message': 'item removed'}, status=200)
+
+    if action == 'increment':
+        cart = request.session['cart']
+        if cart[productID] < 5:
+            cart[productID] += 1
+        else:
+            messages.warning(request, 'maximum quantity limit exceed.')
+        return JsonResponse({'message': 'quantity increased'}, status=200)
+
+    if action == 'decrement':
+        cart = request.session['cart']
+        if cart[productID] > 1:
+            cart[productID] -= 1
+        else:
+            messages.info(request, "Click on Remove to remove item from cart ... ")
+        return JsonResponse({'message': 'quantity increased'}, status=200)
 
 
 def check_item_in_cart(request):
+    productID = request.GET.get('id')
     if request.user.is_authenticated:
-        productID = request.GET.get('id')
         if UserCart.objects.filter(user=request.user, cart_item_id=productID).exists():
             return JsonResponse('found', safe=False)
         else:
             return JsonResponse('not found', safe=False)
-
     else:
-        return JsonResponse({'message': 'ok'})
+        cart = request.session.get('cart', False)
+        if cart and productID in list(cart.keys()):
+            return JsonResponse('found', safe=False)
+        else:
+            return JsonResponse('not found', safe=False)
