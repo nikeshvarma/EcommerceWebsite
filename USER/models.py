@@ -28,7 +28,7 @@ class UserProfile(models.Model):
 
 class UserCart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    cart_item = models.ForeignKey(Product, on_delete=models.CASCADE, primary_key=True)
+    cart_item = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
 
     class Meta:

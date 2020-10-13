@@ -67,7 +67,7 @@ def updatecart(request):
             item.quantity -= 1
             item.save()
         else:
-            messages.warning(request, "Can't reduce quantity.")
+            messages.warning(request, "Click on Remove to remove item from cart ... ")
             return JsonResponse({'error': "Can't reduce quantity."}, safe=False)
 
     elif action == 'remove':

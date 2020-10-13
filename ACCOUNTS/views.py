@@ -17,15 +17,23 @@ class Login(LoginView):
     template_name = 'accounts/loginpage.html'
 
     def get_success_url(self):
-        # cart = self.request.session.get('cart', False)
-        # if cart:
-        #     UserCart.objects.get_or_create()
-        return reverse('home_page')
+        cart = self.request.session.get('cart', False)
+        if cart:
+            for item, quantity in cart.items():
+                UserCart.objects.update_or_create(
+                    user=self.request.user,
+                    cart_item_id=item,
+                    quantity=quantity
+                )
+        nextURL = self.request.POST.get('next', False)
+        if nextURL:
+            return nextURL
+        else:
+            return reverse('home_page')
 
 
 class SignUp(FormView):
     form_class = SignUpForm
-    success_url = '/user/profile/update'
     template_name = 'accounts/signuppage.html'
 
     def form_valid(self, form):
@@ -48,6 +56,17 @@ class SignUp(FormView):
         )
         user.save()
         return user
+
+    def get_success_url(self):
+        cart = self.request.session.get('cart', False)
+        if cart:
+            for item, quantity in cart.items():
+                UserCart.objects.update_or_create(
+                    user=self.request.user,
+                    cart_item_id=item,
+                    quantity=quantity
+                )
+        return reverse('profile_page')
 
 
 def logout_user(request):

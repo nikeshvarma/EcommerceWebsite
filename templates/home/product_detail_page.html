@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="img-card">
                             <a id="add-to-cart" type="button" onclick="updateCart({{ product.id }}, 'add')" class="btn btn-outline-primary m-3">ADD TO CART</a>
-                            <button type="button" class="btn btn-outline-success m-3">BUY NOW</button>
+                            <a type="button" class="btn btn-outline-warning m-3" onclick="buyNow({{ product.id }}, 'add')">BUY NOW</a>
                         </div>
                     </div>
                 </div>

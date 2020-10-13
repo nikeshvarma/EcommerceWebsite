@@ -1,4 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, DetailView
 
 from LAPTOP.models import LaptopDetails
@@ -42,6 +44,11 @@ class ProductDetailView(DetailView):
             return PhoneDetails
         elif product_type == 'Laptops':
             return LaptopDetails
+
+
+@method_decorator(login_required, name='dispatch')
+class CheckOutView(TemplateView):
+    template_name = 'home/checkout.html'
 
 
 class AboutView(TemplateView):

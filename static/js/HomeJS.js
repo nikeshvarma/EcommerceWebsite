@@ -38,6 +38,15 @@ function searchQuery(event) {
     })
 }
 
+function buyNow(id, action) {
+    window.location = "http://localhost:8000/checkout";
+    if (user != 'AnonymousUser') {
+        updateUserCart(id, action);
+    } else {
+        updateSessionCart(id, action);
+    }
+}
+
 
 function updateCart(id, action) {
     if (user != 'AnonymousUser') {
