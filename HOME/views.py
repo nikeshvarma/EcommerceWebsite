@@ -5,6 +5,8 @@ from django.views.generic import TemplateView, DetailView
 
 from LAPTOP.models import LaptopDetails
 from PHONES.models import PhoneDetails
+from USER.forms import AddressForm
+from USER.models import UserProfile, UserCart
 from .models import CarouselImage
 from PRODUCTS.models import Product
 
@@ -49,6 +51,16 @@ class ProductDetailView(DetailView):
 @method_decorator(login_required, name='dispatch')
 class CheckOutView(TemplateView):
     template_name = 'home/checkout.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CheckOutView, self).get_context_data(**kwargs)
+        context['profile'] = UserProfile.objects.get(user=self.request.user)
+        items = UserCart.objects.filter(user=self.request.user)
+        item_list = list(items.values_list('quantity', 'cart_item__product_selling_price'))
+        billing_amount = sum([x[0] * x[1] for x in item_list])
+        context['cart_items'] = items
+        context['amount'] = billing_amount
+        return context
 
 
 class AboutView(TemplateView):
