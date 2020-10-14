@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from PRODUCTS.models import Product
 from .models import UserProfile, UserCart
-from USER.forms import ProfileForm
+from USER.forms import ProfileForm, AddressForm
 
 
 @method_decorator(login_required, name='dispatch')
@@ -23,6 +23,19 @@ class ProfileView(UpdateView):
     def get_success_url(self):
         messages.success(self.request, 'Profile update successfully')
         return reverse('profile_page')
+
+
+class AddressView(UpdateView):
+    template_name = 'user/address_page.html'
+    form_class = AddressForm
+
+    def get_object(self, queryset=None):
+        user = UserProfile.objects.get(user_id=self.request.user.id)
+        return user
+
+    def get_success_url(self):
+        messages.success(self.request, 'Address updated successfully')
+        return reverse('address_update_page')
 
 
 class CartView(TemplateView):

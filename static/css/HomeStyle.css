@@ -32,7 +32,7 @@
 
 .searchbar {
     margin-left: auto;
-    max-width: 350px;
+    max-width: 400px;
 }
 
 .dropdown-toggle::after {
@@ -106,11 +106,32 @@
         padding: 10px;
         margin: 0 auto;
     }
+
+    .searchbar {
+        margin: 0;
+        width: 100%;
+    }
+
+    .brand {
+        position: relative;
+        left: -30px;
+        margin-top: 10px;
+    }
 }
 
 .img-card {
     margin-left: auto;
     margin-right: auto;
+}
+
+
+.fa-circle {
+    color: #DF0000;
+}
+
+.red-cart {
+    color: #DF0000;
+    background: white;
 }
 
 .detail-page-img {

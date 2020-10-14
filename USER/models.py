@@ -15,9 +15,12 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=10)
-    gender = models.CharField(max_length=6, choices=GENDER)
-    delivery_address_1 = models.TextField(blank=True, null=True)
-    delivery_address_2 = models.TextField(blank=True, null=True)
+    gender = models.CharField(max_length=6, choices=GENDER, null=False, blank=False)
+    pincode = models.CharField(max_length=6)
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=150)
+    state = models.CharField(max_length=150)
+    landmark = models.CharField(max_length=255)
 
     def __str__(self):
         return self.name
