@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, FormView
 
 from LAPTOP.models import LaptopDetails
 from PHONES.models import PhoneDetails
@@ -56,6 +56,8 @@ class CheckOutView(TemplateView):
         context = super(CheckOutView, self).get_context_data(**kwargs)
         context['profile'] = UserProfile.objects.get(user=self.request.user)
         items = UserCart.objects.filter(user=self.request.user)
+        product_id = dict([x for x in items.values_list('cart_item_id', 'quantity')])
+        context['product_id'] = str(product_id)
         item_list = list(items.values_list('quantity', 'cart_item__product_selling_price'))
         billing_amount = sum([x[0] * x[1] for x in item_list])
         context['cart_items'] = items

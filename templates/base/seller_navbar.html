@@ -27,7 +27,7 @@
 
     <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-            <a href="{% url 'seller_profile' %}" class="nav-link">{{ user }}</a>
+            <a href="{% url 'seller_profile' %}" class="nav-link">{{ user.shop.shop_name }}</a>
         </li>
     </ul>
 

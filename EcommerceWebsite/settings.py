@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'PRODUCTS.apps.ProductsConfig',
     'PHONES.apps.PhonesConfig',
     'LAPTOP.apps.LaptopConfig',
+    'ORDER.apps.OrderConfig',
 
 ]
 
@@ -103,6 +104,17 @@ DATABASES = {
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 # SESSION_COOKIE_AGE = 60 * 10
+
+# PAYTM CONFIGURATION
+PAYTM_COMPANY_NAME = "OnlineStore.com"  # For representation purposes
+PAYTM_INDUSTRY_TYPE_ID = "Retail"  # For staging environment
+PAYTM_CHANNEL_ID = "WEB"
+PAYTM_MERCHANT_KEY = "PAYTM_MERCHANT_KEY"
+PAYTM_MERCHANT_ID = "PAYTM_MERCHANT_ID"
+PAYTM_CALLBACK_URL = "http://localhost:8000/orders/payment-validation/"
+PAYTM_WEBSITE = "WEBSTAGING"
+PAYTM_PAYMENT_GATEWAY_URL = "https://securegw-stage.paytm.in/order/process"
+PAYTM_TRANSACTION_STATUS_URL = "https://securegw-stage.paytm.in/order/status"
 
 # EMAIL SMTP CONFIGURATION
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

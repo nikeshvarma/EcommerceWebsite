@@ -56,7 +56,7 @@ class UpdateProductView(UpdateView):
 
     def form_valid(self, form):
         if form.cleaned_data['is_product_live'] and self.object.is_product_verified:
-            messages.success(self.request, 'Yehh your product is live ...')
+            messages.success(self.request, 'Good job your product is live ...')
             return super(UpdateProductView, self).form_valid(form)
         else:
             postForm = form.save(commit=False)
