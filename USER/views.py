@@ -1,14 +1,50 @@
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
-from django.views.generic import UpdateView, TemplateView
+from django.views.generic import UpdateView, TemplateView, DetailView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+
+from ORDER.models import Order, ProductOrdered
 from PRODUCTS.models import Product
 from .models import UserProfile, UserCart
 from USER.forms import ProfileForm, AddressForm
+
+
+@method_decorator(login_required, name='dispatch')
+class OrderDetailView(DetailView):
+    template_name = 'order/order_detail.html'
+
+    def get(self, request, *args, **kwargs):
+        if self.get_object().user == self.request.user:
+            return super(OrderDetailView, self).get(request, *args, **kwargs)
+        else:
+            return HttpResponse()
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs['order_id']
+        order = Order.objects.get(order_id=pk)
+        return order
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderDetailView, self).get_context_data()
+        product = ProductOrdered.objects.get(order_id=self.kwargs['order_id'])
+        context['products'] = product.product
+
+        return context
+
+
+@method_decorator(login_required, name='dispatch')
+class OrderView(TemplateView):
+    template_name = 'order/order_page.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(OrderView, self).get_context_data()
+        orders = {Product.objects.get(order__order_id=x.order_id): [x.order_status, x.order_id] for x in Order.objects.filter(user=self.request.user)}
+        context['products'] = orders
+        return context
 
 
 @method_decorator(login_required, name='dispatch')

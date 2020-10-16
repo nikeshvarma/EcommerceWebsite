@@ -18,15 +18,65 @@
         {% include 'base/messages.html' %}
     {% endif %}
 
-    <div class="card vh-100">
+
+    <div class="vh-100">
         <div class="card-header">
             <h6 class="display-4">Order's Summary</h6>
         </div>
-        <div class="card-body">
-            <div class="col-12">
+        <table width="100%" cellspacing="5" cellpadding="5" class="table table-bordered">
+            <tbody>
 
-            </div>
-        </div>
+            {% for order in object_list %}
+
+                <tr>
+                    <th class="text-center" scope="row">{{ forloop.counter }}</th>
+                    <td>
+                        <div class="text-center">
+                            <img class="order-image" src="{{ order.product.product_home_img.url }}" alt="{{ order.product.product_name }}">
+                        </div>
+                    </td>
+                    <td>
+                        <div>
+                            <p class="p-0 m-0"><strong>Item: </strong>{{ order.product.product_name }}</p>
+                            <p class="p-0 m-0"><strong>Price: </strong> &#8377; {{ order.product.product_selling_price }}</p>
+                            <p class="p-0 m-0"><strong>Quantity: </strong>{{ order.quantity }}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-12">
+                                <h6 class="w-100 badge badge-info">Buyer Details</h6>
+                            </div>
+                            <div class="col-6">
+                                <p class="p-0 m-0"><strong>Name:</strong> {{ order.order.name }}</p>
+                                <p class="p-0 m-0"><strong>Address:</strong> {{ order.order.address }}</p>
+                                <p class="p-0 m-0"><strong>Phone Number:</strong> {{ order.order.phone_number }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="p-0 m-0"><strong>Order Date:</strong> {{ order.order.order_date }}</p>
+                                <p class="p-0 m-0"><strong>Billing Amount: </strong> &#8377; {{ order.order.amount }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <h6 class="w-100 badge badge-danger">Order Status</h6>
+                        <p class="p-0 m-0">{{ order.order.order_status }}</p>
+                    </td>
+                    <td class="text-center">
+                        <h6 class="w-100 badge badge-secondary">Payment Status</h6>
+                        <p class="p-0 m-0">{{ order.order.payment_status }}</p>
+                    </td>
+                    <td class="text-center">
+                        <a href="#" class="anchor-class btn btn-warning my-1 w-75">Generate Invoice</a>
+                        <a href="#" class="anchor-class btn btn-success my-1 w-75">Update Order Status</a>
+                        <a href="#" class="anchor-class btn btn-info my-1 w-75">Payment Details</a>
+                    </td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
     </div>
 
     <div class="pagination">

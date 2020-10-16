@@ -1,17 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends 'base/base.html' %}
+
+{% block title %}
     <title>Payment Successful</title>
-</head>
-<body>
-<h1 style="margin-top: 200px;" align="center">Payment Successful</h1>
+{% endblock title %}
 
-<h3 align="center" style="margin-top: 100px;">Redirecting you to orders page...</h3>
+{% block navbar %}
+{% endblock navbar %}
 
-<script type="text/JavaScript">
-    setTimeout("location.href = 'http://localhost:8000/';", 4000);
-</script>
+{% block sidebar %}
+{% endblock sidebar %}
 
-</body>
-</html>
+{% block content %}
+    <h1 style="margin-top: 200px;" align="center" class="text-capitalize">Transaction Successful</h1>
+
+    <h3 align="center" style="margin-top: 100px;" class="text-capitalize">Redirecting you to orders page...</h3>
+
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <script type="text/JavaScript">
+        setTimeout("location.href = 'http://localhost:8000/user/orders/';", 4000);
+    </script>
+
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}

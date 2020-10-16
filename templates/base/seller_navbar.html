@@ -12,6 +12,9 @@
 
     <ul class="navbar-nav">
         <li class="nav-item active">
+            <a class="nav-link" href="{% url 'seller_home' %}">Home</a>
+        </li>
+        <li class="nav-item active">
             <a class="nav-link" href="{% url 'list_product' %}">Listing</a>
         </li>
         <li class="nav-item active">
@@ -19,9 +22,6 @@
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="{% url 'seller_orders' %}">Orders</a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link" href="{% url 'seller_payment' %}">Payments</a>
         </li>
     </ul>
 

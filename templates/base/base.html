@@ -51,15 +51,15 @@
                 <li><a href="{% url 'cart' %}">Cart</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'profile_page' %}">Profile</a></li>
-                    <li><a href="#">Orders</a></li>
+                    <li><a href="{% url 'order_page' %}">Orders</a></li>
                     <li><a href="{% url 'logout_page' %}">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'login_page' %}">Login</a></li>
                     <li><a href="{% url 'signup_page' %}">Sign Up</a></li>
                 {% endif %}
                 <li><a href="{% url 'seller_home' %}">Continue as Seller</a></li>
-                <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
                 <li><a href="{% url 'about_us' %}">About Us</a></li>
+                <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
             </ul>
         </div>
     </div>

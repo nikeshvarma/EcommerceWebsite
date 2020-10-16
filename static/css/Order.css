@@ -6,3 +6,18 @@
     padding: 10px;
     border: 1px solid black;
 }
+
+.order-image {
+    height: 100px;
+    width: auto;
+}
+
+.box-hover-order {
+    transition: .3s;
+}
+
+.box-hover-order:hover {
+    -ms-transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    transform: scale(1.02);
+}

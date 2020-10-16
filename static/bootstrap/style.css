@@ -154,3 +154,9 @@
         transition: all .4s ease 0s;
     }
 }
+
+@media (max-width: 992px) {
+    .container {
+        width: 100%;
+    }
+}

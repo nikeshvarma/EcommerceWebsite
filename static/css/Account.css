@@ -1,15 +1,14 @@
-.LoginForm {
-    box-shadow: 0 10px 16px 10px rgba(0, 0, 0, 0.2), 0 6px 20px 6px rgba(0, 0, 0, 0.19) !important;
-    border-radius: 5px;
-    margin-top: 8%;
-    border: 1px solid #f0f0f0;
-    padding: 10px;
-    max-width: 300px;
-    margin-right: auto;
-    margin-left: auto;
-    background-color: white;
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.new_account {
-    margin: 10px;
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
 }

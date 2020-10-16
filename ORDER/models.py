@@ -35,6 +35,7 @@ class Order(models.Model):
 
     class Meta:
         db_table = 'Orders'
+        ordering = ['-order_id']
 
 
 class ProductOrdered(models.Model):

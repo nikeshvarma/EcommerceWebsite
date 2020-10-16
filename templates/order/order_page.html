@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    <title>Orders</title>
+{% endblock title %}
+
+{% block content %}
+    {% if messages %}
+        {% include 'base/messages.html' %}
+    {% endif %}
+
+    <div>
+        <div class="container-lg">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="alert">Your Orders</h3>
+                    {% for item, status in products.items %}
+                        <a href="{% url 'order_detail_page' status.1 %}" class="anchor-class">
+                            <div class="card shadow-sm m-2 box-hover-order">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4 col-md-2 text-center">
+                                            <img class="order-image" src="{{ item.product_home_img.url }}" alt="{{ item.product_name }}">
+                                        </div>
+                                        <div class="col-6 col-md-3 text-xs-center">
+                                            <p>{{ item.product_name }}</p>
+                                            <small>Seller: {{ item.product_shop.shop_name }}</small>
+                                        </div>
+                                        <div class="col-2 col-md-2">
+                                            <p> &#8377; {{ item.product_selling_price }}</p>
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <p>Order Status: {{ status.0 }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+

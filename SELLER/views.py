@@ -2,8 +2,11 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, TemplateView, UpdateView
+from django.views.generic import CreateView, TemplateView, UpdateView, ListView
 from django.contrib.auth import get_user_model
+
+from ORDER.models import Order, ProductOrdered
+from PRODUCTS.models import Product
 from .models import Shop
 from .forms import SellerRegisterForm
 
@@ -38,10 +41,29 @@ class SellerProfileView(TemplateView):
 class SellerHomeView(TemplateView):
     template_name = 'seller/seller_home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(SellerHomeView, self).get_context_data()
+        # Order Section
+        context['orders'] = Order.objects.filter(product__product_shop__shop_owner=self.request.user).count()
+
+        # Listing Section
+        context['listed'] = Product.objects.filter(product_shop__shop_owner=self.request.user).count()
+        context['live'] = Product.objects.filter(product_shop__shop_owner=self.request.user, is_product_live=True).count()
+        context['verified'] = Product.objects.filter(product_shop__shop_owner=self.request.user, is_product_verified=True).count()
+        context['non_verified'] = Product.objects.filter(product_shop__shop_owner=self.request.user, is_product_verified=False).count()
+
+        return context
+
 
 @method_decorator([login_required, user_passes_test(lambda u: u.is_seller, login_url='/seller/register-shop/')], name='dispatch')
-class SellerOrdersView(TemplateView):
+class SellerOrdersView(ListView):
     template_name = 'seller/seller_orders.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        orders = Order.objects.filter(product__product_shop__shop_owner=self.request.user)
+        products = ProductOrdered.objects.filter(order__in=orders).order_by('-order_id')
+        return products
 
 
 @method_decorator([login_required, user_passes_test(lambda u: u.is_seller, login_url='/seller/register-shop/')], name='dispatch')
