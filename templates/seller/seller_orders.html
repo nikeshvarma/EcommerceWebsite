@@ -19,8 +19,8 @@
     {% endif %}
 
 
-    <div class="vh-100">
-        <div class="card-header">
+    <div>
+        <div class="card card-header">
             <h6 class="display-4">Order's Summary</h6>
         </div>
         <table width="100%" cellspacing="5" cellpadding="5" class="table table-bordered">
@@ -68,7 +68,7 @@
                     </td>
                     <td class="text-center">
                         <a href="#" class="anchor-class btn btn-warning my-1 w-75">Generate Invoice</a>
-                        <a href="#" class="anchor-class btn btn-success my-1 w-75">Update Order Status</a>
+                        <button type="button" class="btn btn-success my-1 w-75" data-toggle="modal" data-target="#orderStatusModal">Update Order Status</button>
                         <a href="#" class="anchor-class btn btn-info my-1 w-75">Payment Details</a>
                     </td>
                 </tr>
@@ -79,6 +79,40 @@
         </table>
     </div>
 
+
+
+    <div class="modal fade" id="orderStatusModal" tabindex="-1" role="dialog" aria-labelledby="orderStatusModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Order Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        This Action Cannot Reverted.
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="order-status-update" class="col-form-label">Order Status:</label>
+                            {{ orderStatusForm }}
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
+
+{% block footer %}
     <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
@@ -96,8 +130,4 @@
         {% endif %}
     </span>
     </div>
-{% endblock content %}
-
-{% block footer %}
-
 {% endblock footer %}

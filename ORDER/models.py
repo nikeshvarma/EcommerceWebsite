@@ -8,7 +8,6 @@ User = get_user_model()
 
 class Order(models.Model):
     ORDER_STATUS = [
-        ('Ordered', 'Ordered'),
         ('Approved', 'Approved'),
         ('Packed', 'Packed'),
         ('Dispatched', 'Dispatched'),
@@ -28,7 +27,7 @@ class Order(models.Model):
     order_date = models.DateField(auto_now_add=True)
     order_time = models.TimeField(auto_now_add=True)
     payment_status = models.CharField(max_length=30)
-    order_status = models.CharField(max_length=50, choices=ORDER_STATUS)
+    order_status = models.CharField(max_length=50, choices=ORDER_STATUS, default='Ordered')
 
     def __str__(self):
         return str(self.order_id)

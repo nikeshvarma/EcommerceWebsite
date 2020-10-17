@@ -9,6 +9,8 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.contrib.auth import get_user_model
 from LAPTOP.forms import LaptopDetailUpdateForm
 from PHONES.forms import PhoneDetailsUpdateForm
+from BOOKS.forms import BookDetailsUpdateForm
+from FASHION.forms import ShirtDetailsUpdateForm
 from .models import Product
 from .forms import ListProductForm, UpdateProductForm
 
@@ -106,6 +108,10 @@ class ProductDetailUpdateView(UpdateView):
             return PhoneDetailsUpdateForm
         elif category == 'Laptops':
             return LaptopDetailUpdateForm
+        elif category == 'Books':
+            return BookDetailsUpdateForm
+        elif category == 'Shirts':
+            return ShirtDetailsUpdateForm
 
     def get_object(self, queryset=None):
         model = self.get_form_class().Meta.model

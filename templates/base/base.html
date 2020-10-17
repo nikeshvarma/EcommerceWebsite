@@ -48,15 +48,15 @@
             <ul class="sidebar-nav text-white" id="sidebar">
                 <li><a href="{% url 'home_page' %}">Home</a></li>
                 <li><a href="{% url 'shop_by_category' %}">Shop By Category</a></li>
-                <li><a href="{% url 'cart' %}">Cart</a></li>
-                {% if user.is_authenticated %}
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'login_page' %}">Login</a></li>
+                    <li><a href="{% url 'signup_page' %}">Sign Up</a></li>
+                {% else %}
                     <li><a href="{% url 'profile_page' %}">Profile</a></li>
                     <li><a href="{% url 'order_page' %}">Orders</a></li>
                     <li><a href="{% url 'logout_page' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'login_page' %}">Login</a></li>
-                    <li><a href="{% url 'signup_page' %}">Sign Up</a></li>
                 {% endif %}
+                <li><a href="{% url 'cart' %}">Cart</a></li>
                 <li><a href="{% url 'seller_home' %}">Continue as Seller</a></li>
                 <li><a href="{% url 'about_us' %}">About Us</a></li>
                 <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
@@ -85,9 +85,9 @@
             </ul>
         </div>
 
-        <form class="searchbar" action="#" method="GET">
+        <form class="searchbar" action="{% url 'search_result' %}" method="GET">
             <div id="search-bar" class="input-group searchbar">
-                <input id="search-field" type="text" name="search_query" class="form-control " placeholder="Search" onkeyup="searchQuery(event)">
+                <input id="search-field" type="text" name="q" class="form-control " placeholder="Search">
                 <div class="input-group-append">
                     <button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button>
                 </div>

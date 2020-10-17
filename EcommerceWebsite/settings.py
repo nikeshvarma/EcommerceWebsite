@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'PHONES.apps.PhonesConfig',
     'LAPTOP.apps.LaptopConfig',
     'ORDER.apps.OrderConfig',
-    'GROCERY.apps.GroceryConfig',
+    'BOOKS.apps.GroceryConfig',
     'FASHION.apps.FashionConfig',
 
 ]

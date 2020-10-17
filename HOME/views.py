@@ -1,11 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, DetailView, FormView
+from django.views.generic import TemplateView, DetailView, ListView
+from django.db.models import Q
 
+from BOOKS.models import BookDetails
+from FASHION.models import ShirtDetails
 from LAPTOP.models import LaptopDetails
 from PHONES.models import PhoneDetails
-from USER.forms import AddressForm
 from USER.models import UserProfile, UserCart
 from .models import CarouselImage
 from PRODUCTS.models import Product
@@ -22,6 +24,20 @@ class HomeView(TemplateView):
             'latest_products': latest_products,
         }
         return context
+
+
+class SearchView(ListView):
+    template_name = 'home/search_result.html'
+    paginate_by = 30
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        queryset = Product.objects.filter(
+            Q(product_name=query)
+            | Q(product_name__startswith=query)
+            | Q(product_name__icontains=query)
+        )
+        return queryset
 
 
 class CategoryView(TemplateView):
@@ -50,6 +66,10 @@ class ProductDetailView(DetailView):
             return PhoneDetails
         elif product_type == 'Laptops':
             return LaptopDetails
+        elif product_type == 'Books':
+            return BookDetails
+        elif product_type == 'Shirts':
+            return ShirtDetails
 
 
 @method_decorator(login_required, name='dispatch')

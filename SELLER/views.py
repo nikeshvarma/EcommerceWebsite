@@ -6,6 +6,7 @@ from django.views.generic import CreateView, TemplateView, UpdateView, ListView
 from django.contrib.auth import get_user_model
 
 from ORDER.models import Order, ProductOrdered
+from ORDER.forms import OrderStatusForm
 from PRODUCTS.models import Product
 from .models import Shop
 from .forms import SellerRegisterForm
@@ -64,6 +65,11 @@ class SellerOrdersView(ListView):
         orders = Order.objects.filter(product__product_shop__shop_owner=self.request.user)
         products = ProductOrdered.objects.filter(order__in=orders).order_by('-order_id')
         return products
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(SellerOrdersView, self).get_context_data()
+        context['orderStatusForm'] = OrderStatusForm
+        return context
 
 
 @method_decorator([login_required, user_passes_test(lambda u: u.is_seller, login_url='/seller/register-shop/')], name='dispatch')

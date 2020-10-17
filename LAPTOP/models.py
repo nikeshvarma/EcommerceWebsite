@@ -9,11 +9,25 @@ class LaptopDetails(models.Model):
         ('MacBook', 'MacBook'),
         ('Gaming Laptop', 'Gaming Laptop')
     ]
+
+    OS = [
+        ('Windows', 'Windows'),
+        ('MAC-OS', 'MAC-OS'),
+        ('Linux', 'Linux'),
+    ]
+
     product = models.OneToOneField(Product, on_delete=models.CASCADE)
     brand = models.CharField(max_length=100)
     laptop_type = models.CharField(max_length=50, choices=LAPTOP_TYPE)
-    RAM = models.IntegerField(default=1)
-    hdd = models.IntegerField(default=32)
+    processor_name = models.CharField(max_length=100)
+    graphic_card_name = models.CharField(max_length=200)
+    RAM = models.PositiveIntegerField()
+    HDD = models.PositiveIntegerField()
+    SSD = models.PositiveIntegerField()
+    charger_output = models.CharField(max_length=6)
+    has_graphic_card = models.BooleanField(default=False)
+    operating_system = models.CharField(max_length=100, choices=OS)
+    warranty = models.PositiveIntegerField()
 
     def __str__(self):
         return self.product.product_name
