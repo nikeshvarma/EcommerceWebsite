@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>OnlineStore.com | Shop by category</title>
+{% endblock title %}
+
+{% block content %}
+    {% if messages %}
+        {% include 'base/messages.html' %}
+    {% endif %}
+
+    <div>
+        <div class="card vh-50">
+            <div class="card-header">
+                <h3 class="display-4">Shop By Categories</h3>
+            </div>
+            <div class="card-body shadow-sm">
+                <div class="row mt-5 text-center">
+                    <div class="col-6 col-md-3">
+                        <a class="box-hover anchor-class" href="{% url 'phone_home' %}">
+                            <img class="category-img" src="{% static 'img/static images/mobiles.jpg' %}" alt="mobiles"><br>
+                            Mobiles
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a class="anchor-class box-hover" href="{% url 'laptop_home' %}">
+                            <img class="category-img" src="{% static 'img/static images/laptops.jpg' %}" alt="laptops"><br>
+                            Laptops
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a class="anchor-class box-hover" href="{% url 'fashion_home' %}">
+                            <img class="category-img" src="{% static 'img/static images/fashion.jpg' %}" alt="fashion"><br>
+                            Fashion
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a class="anchor-class box-hover" href="{% url 'grocery_home' %}">
+                            <img class="category-img" src="{% static 'img/static images/grocery.jpg' %}" alt="grocery"><br>
+                            Grocery
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

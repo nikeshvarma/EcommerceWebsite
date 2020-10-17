@@ -47,7 +47,7 @@
             </ul>
             <ul class="sidebar-nav text-white" id="sidebar">
                 <li><a href="{% url 'home_page' %}">Home</a></li>
-                <li><a href="#">Shop By Category</a></li>
+                <li><a href="{% url 'shop_by_category' %}">Shop By Category</a></li>
                 <li><a href="{% url 'cart' %}">Cart</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'profile_page' %}">Profile</a></li>

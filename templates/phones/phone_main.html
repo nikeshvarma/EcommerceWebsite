@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>OnlineStore.com | Mobiles</title>
+{% endblock title %}
+
+{% block content %}
+    {% if messages %}
+        {% include 'base/messages.html' %}
+    {% endif %}
+
+    <div>
+        <div class="row">
+            <div class="card card-header col-12">
+                <h2>Smartphones</h2>
+            </div>
+            <div class="col-12 mt-3">
+                <div class="row mb-2">
+                    {% for product in object_list %}
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-2">
+                            <a href="{% url 'product_detail_page' product.product_type product.product_name product.id %}" class="anchor-class">
+                                <div class="card box-hover-order card-padding">
+                                    <img class="home-card-img" src="{{ product.product_home_img.url }}" alt="{{ product.product_name }}">
+                                    <div class="card-body text-center">
+                                        <h6 class="text-overflow">{{ product.product_name }}</h6>
+                                        <p class="text-success">Rs. {{ product.product_selling_price }}</p>
+                                        <p class="text-secondary">{{ product.product_type }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <hr>
+    <div class="pagination">
+    <span class="row col-12">
+        {% if page_obj.has_previous %}
+            <div class="d-inline-flex mx-auto">
+                <a class="page-link" href="?page=1">&laquo; first</a>
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+            </div>
+        {% endif %}
+
+        <span class="active">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <div class="d-inline-flex mx-auto">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            </div>
+        {% endif %}
+    </span>
+    </div>
+    <hr>
+
+{% endblock content %}

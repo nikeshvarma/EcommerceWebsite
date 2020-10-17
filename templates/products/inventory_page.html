@@ -46,8 +46,8 @@
                             <td>{{ product.product_stoke }}</td>
                             <td>&#x20B9; {{ product.product_MRP }}</td>
                             <td>&#x20B9; {{ product.product_selling_price }}</td>
-                            <td>{{ product.is_product_live }}</td>
-                            <td>{{ product.is_product_verified }}</td>
+                            <td>{% if product.is_product_live %}Yes{% else %}No{% endif %}</td>
+                            <td>{% if product.is_product_verified %}Yes{% else %}No{% endif %}</td>
                             <td>
                                 <a href="{% url 'update_listing' product.id %}" class="btn btn-warning" type="button">Update Stock</a>
                                 <a href="{% url 'update_phone_details' product.product_type product.id %}" class="btn btn-primary" type="button">Update Details</a>

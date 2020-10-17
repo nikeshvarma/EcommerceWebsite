@@ -18,16 +18,16 @@
         {% include 'base/messages.html' %}
     {% endif %}
 
-    <div class="card vh-100">
-        <div class="card-header">
-            <h6 class="display-4">Seller Profile</h6>
-        </div>
-        <div class="card-body">
-            <div class="col-12">
-
+    <div class="row mt-3">
+        <div class="col-6">
+            <div class="card card-body shadow-sm">
+                <div>
+                    <h6>Login as: {{ user }}</h6>
+                </div>
             </div>
         </div>
     </div>
+
 {% endblock content %}
 
 {% block footer %}

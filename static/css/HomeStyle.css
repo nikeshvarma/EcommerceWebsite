@@ -163,3 +163,8 @@
 .page-footer ul li {
     font-size: 18px;
 }
+
+.category-img {
+    height: 100px;
+    width: auto;
+}

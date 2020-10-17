@@ -1,7 +1,8 @@
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import F
 
 from PRODUCTS.models import Product
@@ -60,6 +61,20 @@ def payment_request(request):
         'data_dict': data_dict
     }
 
+    # check is product out of stock or not
+    buy_products = list(ProductOrdered.objects.filter(order_id=order.order_id).values_list('product_id', 'quantity'))
+    for item in buy_products:
+        item_obj = Product.objects.select_for_update().get(pk=item[0])
+        quantity = item[1]
+        if int(item_obj.product_stoke) >= int(quantity):
+            pass
+        else:
+            ProductOrdered.objects.filter(order_id=order_id).delete()
+            order.delete()
+            UserCart.objects.filter(user_id=request.user).delete()
+            messages.error(request, 'Sorry ! Product is out of stock')
+            return redirect('order_page')
+
     return render(request, 'payment/payment-redirect.html', context=context)
 
 
@@ -105,6 +120,8 @@ def payment_status(request):
         # Cart deleted after order complete
         UserCart.objects.filter(user=user).delete()
 
+        messages.success(request, 'Order Placed Successful')
+
         return render(request, 'payment/payment-successful-redirect.html')
 
     else:
@@ -133,6 +150,8 @@ def payment_status(request):
         order.payment_status = 'Transaction Failed'
         order.order_status = 'Failed'
         order.save()
+
+        messages.error(request, 'Order Failed')
 
         # check what happened; details in resp['paytm']
         return render(request, 'payment/payment-failed redirect.html')

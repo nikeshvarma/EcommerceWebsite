@@ -1,25 +1,44 @@
-<!doctype html>
-<html lang="en">
-<head>
+
+
+{% extends 'base/base.html' %}
+
+{% block title %}
     <title>Redirecting...</title>
-</head>
-<body>
-<br><br>
-<h1>
-    <center>{{ company_name }}</center>
-</h1>
-<br><br><br>
-<h1>
-    <center>Redirecting to payment gateway<br><br><br>Please do not refresh or go back.</center>
-</h1>
-<form method="POST" action="{{ payment_url }}" , name="form1">
-    {% csrf_token %}
-    {% for key, value in data_dict.items %}
-        <input type="hidden" name="{{ key }}" value="{{ value }}">
-    {% endfor %}
-    <script type="text/javascript">
-        document.form1.submit();
-    </script>
-</form>
-</body>
-</html>
+{% endblock title %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block content %}
+
+    <h1>
+        <center>Redirecting to payment gateway<br><br><br>Please do not refresh or go back.</center>
+    </h1>
+
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+
+    <form method="POST" action="{{ payment_url }}" , name="form1">
+        {% csrf_token %}
+        {% for key, value in data_dict.items %}
+            <input type="hidden" name="{{ key }}" value="{{ value }}">
+        {% endfor %}
+        <script type="text/javascript">
+            document.form1.submit();
+        </script>
+    </form>
+
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
+
+
+

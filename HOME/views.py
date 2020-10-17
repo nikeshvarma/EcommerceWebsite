@@ -24,6 +24,10 @@ class HomeView(TemplateView):
         return context
 
 
+class CategoryView(TemplateView):
+    template_name = 'home/category_page.html'
+
+
 class ProductDetailView(DetailView):
     template_name = 'home/product_detail_page.html'
 
