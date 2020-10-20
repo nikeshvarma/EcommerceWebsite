@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block title %}
-    <title>OnlineStore.com | Home</title>
+    <title>OnlineStore.com | {{ product.product_name }}</title>
 {% endblock title %}
 
 {% block content %}
@@ -23,12 +23,12 @@
                     </div>
                 {% endfor %}
             </div>
+
             <div class="col-12 col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-body img-card">
                         <div id="main-img">
-                            <img src="{{ product.product_home_img.url }}" class="detail-page-img"
-                                 alt="{{ product.product_name }}">
+                            <img src="{{ product.product_home_img.url }}" class="detail-page-img" alt="{{ product.product_name }}">
                         </div>
                     </div>
                     <div class="row">
@@ -39,15 +39,19 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-md-6">
                 <div class="card">
                     <div class="card-body shadow-sm bg-light">
                         <div class="ml-5">
                             <div>
-                                <h4>{{ product.product_name }}</h4>
-                            </div>
-                            <div>
-                                <h5>{{ details }}</h5>
+                                <h5>{{ product.product_name }}</h5>
+                                <h3>&#x20B9; {{ product.product_selling_price }}
+                                    <strike class="MRP">&#x20B9; {{ product.product_MRP }}</strike>
+                                    {% if discount > 0 %}
+                                        <small class="discount">{{ discount }}% off</small>
+                                    {% endif %}
+                                </h3>
                             </div>
                         </div>
                     </div>

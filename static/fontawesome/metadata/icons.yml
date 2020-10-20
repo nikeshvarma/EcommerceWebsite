@@ -16354,7 +16354,7 @@ shopping-bag:
     terms:
       - buy
       - checkout
-      - grocery
+      - books
       - payment
       - purchase
   styles:
@@ -16370,7 +16370,7 @@ shopping-basket:
     terms:
       - buy
       - checkout
-      - grocery
+      - books
       - payment
       - purchase
   styles:
@@ -16386,7 +16386,7 @@ shopping-cart:
     terms:
       - buy
       - checkout
-      - grocery
+      - books
       - payment
       - purchase
   styles:

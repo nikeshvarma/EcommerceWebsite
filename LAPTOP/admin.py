@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import LaptopDetails
 
-# Register your models here.
+
+@admin.register(LaptopDetails)
+class LaptopDetails(admin.ModelAdmin):
+    pass

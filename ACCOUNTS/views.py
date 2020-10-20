@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.contrib.auth import logout, login
 from django.urls import reverse
 from django.views.generic import FormView
+from django.core.mail import send_mail
 
 from USER.models import UserCart
 from .forms import SignUpForm
@@ -41,6 +42,7 @@ class SignUp(FormView):
             if form.cleaned_data['password'] == form.cleaned_data['confirm_password']:
                 user = self.create_user(form.cleaned_data)
                 login(self.request, user)
+                # self.send_mail(form.cleaned_data['email'])
                 return super(SignUp, self).form_valid(form)
             else:
                 messages.warning(self.request, 'Password Not Match')
@@ -67,6 +69,17 @@ class SignUp(FormView):
                     quantity=quantity
                 )
         return reverse('profile_page')
+
+    def send_mail(self, email):
+        send_mail(
+            subject='Welcome to OnlineStore!',
+            message='Hi ' + email + '! ' +
+                    'We’re so excited that you’ve decided to choose onlinestore.com. ' +
+                    'You can expect to hear from us <<X>> times a month with special offers, product updates, and more. ' +
+                    'Contact us at helponlinestore@gmail.com if you have any questions.',
+            from_email='helponlinestore2020@gmail.com',
+            recipient_list=[str(email)]
+        )
 
 
 def logout_user(request):

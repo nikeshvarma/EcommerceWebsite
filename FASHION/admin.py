@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import ShirtDetails
 
-# Register your models here.
+
+@admin.register(ShirtDetails)
+class ShirtDetails(admin.ModelAdmin):
+    pass

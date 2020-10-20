@@ -21,15 +21,15 @@ class PhoneDetails(models.Model):
 
     product = models.OneToOneField(Product, on_delete=models.CASCADE)
     brand = models.CharField(max_length=100)
-    phone_type = models.CharField(max_length=50, choices=PHONE_TYPE)
+    phone_type = models.CharField(max_length=50, choices=PHONE_TYPE, default='Android')
     processor_name = models.CharField(max_length=100)
     RAM = models.PositiveIntegerField(default=1)
     internal_storage = models.PositiveIntegerField(default=32)
     color = models.CharField(max_length=50)
     display_size = models.CharField(max_length=20)
     display_resolution = models.CharField(max_length=20)
-    display_type = models.CharField(max_length=50, choices=DISPLAY_TYPES)
-    battery_capacity = models.PositiveIntegerField()
+    display_type = models.CharField(max_length=50, choices=DISPLAY_TYPES, default='IPS')
+    battery_capacity = models.PositiveIntegerField(default=3000)
     charger_output = models.CharField(max_length=6)
 
     def __str__(self):

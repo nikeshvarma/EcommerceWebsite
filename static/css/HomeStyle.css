@@ -168,3 +168,15 @@
     height: 100px;
     width: auto;
 }
+
+.MRP {
+    font-size: medium;
+    margin-left: 10px;
+    color: grey;
+}
+
+.discount {
+    font-size: medium;
+    margin-left: 10px;
+    color: darkgreen;
+}

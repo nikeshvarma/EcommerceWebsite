@@ -21,13 +21,13 @@ class LaptopDetails(models.Model):
     laptop_type = models.CharField(max_length=50, choices=LAPTOP_TYPE)
     processor_name = models.CharField(max_length=100)
     graphic_card_name = models.CharField(max_length=200)
-    RAM = models.PositiveIntegerField()
-    HDD = models.PositiveIntegerField()
-    SSD = models.PositiveIntegerField()
+    RAM = models.PositiveIntegerField(default=4)
+    HDD = models.CharField(max_length=6)
+    SSD = models.CharField(max_length=6)
     charger_output = models.CharField(max_length=6)
     has_graphic_card = models.BooleanField(default=False)
     operating_system = models.CharField(max_length=100, choices=OS)
-    warranty = models.PositiveIntegerField()
+    warranty = models.PositiveIntegerField(default=1)
 
     def __str__(self):
         return self.product.product_name

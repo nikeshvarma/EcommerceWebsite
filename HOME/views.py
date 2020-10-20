@@ -54,9 +54,12 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         model = self.get_model(str(self.object.product_type))
         details = model.objects.get(pk=self.kwargs['id'])
+        product = self.get_object()
+        discount = round(((product.product_MRP - product.product_selling_price) * 100) / product.product_MRP)
         context = {
             'details': details,
-            'product': self.get_object()
+            'product': product,
+            'discount': discount,
         }
         return context
 

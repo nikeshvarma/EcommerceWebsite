@@ -30,29 +30,23 @@
         {% endif %}
     {% endif %}
 
-    <div class="row d-flex justify-content-center">
-
-        <form method="post" action="{% url 'login_page' %}">
-            {% csrf_token %}
-            <table cellspacing="10" cellpadding="10">
-                <tr>
-                    <td>{{ form.username.label_tag }}</td>
-                    <td>{{ form.username|add_class:"form-control" }}</td>
-                </tr>
+    <div>
+        <div class="login-box">
+            <div class="LoginForm">
+                <form method="POST" action="{% url 'login_page' %}">
+                    <h3 align="center" class="bg-secondary p-2 text-light">Login</h3>
+                    {% csrf_token %}
+                    <label class="col-form-label">Email</label><br>
+                    {{ form.username|add_class:'form-control' }}
+                    <label class="col-form-label">Password</label><br>
+                    {{ form.password|add_class:'form-control' }}
+                    <button type="submit" class="mt-5 mb-1 btn btn-success new_account">Login</button>
+                </form>
+                <a class="btn btn-info new_account text-white mt-2 mb-1" href="{% url 'signup_page' %}">Create New Account</a>
                 <br>
-                <tr>
-                    <td>{{ form.password.label_tag }}</td>
-                    <td>{{ form.password|add_class:"form-control" }}</td>
-                </tr>
-            </table>
-            <input type="submit" class="btn btn-success" value="LOGIN">
-            <input type="hidden" name="next" value="{{ next }}">
-
-            <br>
-
-            <h6><a href="{% url 'reset_password' %}">Lost password?</a></h6>
-
-        </form>
+                <a class="password-reset-link mt-2 mb-1" href="{% url 'reset_password' %}">Forgot Password ?</a>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

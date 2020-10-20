@@ -125,3 +125,9 @@ class ProductDetailUpdateView(UpdateView):
     def get_shop_id(self):
         product_id = get_object_or_404(Product, id=self.kwargs['id'])
         return product_id
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailUpdateView, self).get_context_data()
+        product = get_object_or_404(Product, pk=self.object.id)
+        context['image'] = product.product_home_img
+        return context

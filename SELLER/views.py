@@ -9,7 +9,7 @@ from ORDER.models import Order, ProductOrdered
 from ORDER.forms import OrderStatusForm
 from PRODUCTS.models import Product
 from .models import Shop
-from .forms import SellerRegisterForm
+from .forms import SellerRegisterForm, BankDetailsForm
 
 User = get_user_model()
 
@@ -26,6 +26,22 @@ class CreateSeller(CreateView):
         user.is_seller = True
         user.save()
         postForm.shop_owner_id = self.request.user.id
+        postForm.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('bank_details')
+
+
+@method_decorator([login_required, user_passes_test(lambda u: u.is_seller, login_url='/seller/register-shop/')], name='dispatch')
+class BankInfoView(CreateView):
+    template_name = 'seller/seller_bank_details.html'
+    queryset = Shop.objects.all()
+    form_class = BankDetailsForm
+
+    def form_valid(self, form):
+        postForm = form.save(commit=False)
+        postForm.shop_owner = get_object_or_404(Shop, shop_owner_id=self.request.user.id)
         postForm.save()
         return super().form_valid(form)
 

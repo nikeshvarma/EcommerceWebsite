@@ -11,21 +11,27 @@
         {% include 'base/messages.html' %}
     {% endif %}
 
-    <form method="post" action="{% url 'signup_page' %}">
-        {% csrf_token %}
-        {% for field in form %}
-            <table>
-                <tr>
-                    <td>{{ field.label_tag }}</td>
-                    <td>{{ field|add_class:"form-control" }}</td>
-                </tr>
-            </table>
-        {% endfor %}
-
-        <input type="submit" class="btn btn-success" value="Create New Account">
-        <input type="hidden" name="next" value="{{ next }}">
-    </form>
-
-    <p><a href="{% url 'reset_password' %}">Lost password?</a></p>
+    <div class="LoginForm">
+        <form method="post" action="{% url 'signup_page' %}">
+            {% csrf_token %}
+            <div>
+                <div>
+                    <h3 align="center" class="bg-secondary text-light p-2">Create New Account</h3>
+                    {% csrf_token %}
+                    <label>Email: </label>
+                    {{ form.email|add_class:'form-control' }}
+                    <span class="d-none" id="emailcheck"></span>
+                    <label>Password: </label>
+                    {{ form.password|add_class:'form-control' }}
+                    <label>Confirm Password: </label>
+                    {{ form.confirm_password|add_class:'form-control' }}
+                    <span id="massage" class="d-none"></span>
+                    <br>
+                    <button id="createButton" type="submit" class="mt-2 btn btn-primary">Create New Account</button>
+                </div>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </div>
 
 {% endblock %}

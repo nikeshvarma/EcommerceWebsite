@@ -7,3 +7,7 @@ class BookDetailsUpdateForm(forms.ModelForm):
         model = BookDetails
         fields = '__all__'
         exclude = ['product']
+
+        widgets = {
+            'publication_time': forms.TextInput(attrs={'type': 'date'})
+        }
