@@ -160,6 +160,7 @@
     }
 }
 
+
 .page-footer ul li {
     font-size: 18px;
 }
@@ -171,12 +172,23 @@
 
 .MRP {
     font-size: medium;
-    margin-left: 10px;
+    margin-left: 5px;
     color: grey;
 }
 
+.grey-text {
+    color: grey;
+}
+
+
 .discount {
     font-size: medium;
-    margin-left: 10px;
+    margin-left: 5px;
     color: darkgreen;
+}
+
+.few-units {
+    color: red;
+    font-size: medium;
+    margin-left: 10px;
 }

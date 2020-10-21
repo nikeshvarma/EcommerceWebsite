@@ -13,19 +13,8 @@
 
     <div class="bg-light">
         <div class="row no-gutters pt-3">
-            <div class="d-none d-md-none d-lg-block col-md-1 text-center ml-3">
-                {% for image in product_images %}
-                    <div class="img-thumbnail">
-                        <div id="home-side-img">
-                            <img src="{{ image.images.url }}" alt="{{ product.product_name }}"
-                                 onclick="changeImage(this.src)">
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-
             <div class="col-12 col-md-4">
-                <div class="card shadow-sm">
+                <div class="card">
                     <div class="card-body img-card">
                         <div id="main-img">
                             <img src="{{ product.product_home_img.url }}" class="detail-page-img" alt="{{ product.product_name }}">
@@ -33,25 +22,144 @@
                     </div>
                     <div class="row">
                         <div class="img-card">
-                            <a id="add-to-cart" type="button" onclick="updateCart({{ product.id }}, 'add')" class="btn btn-outline-primary m-3">ADD TO CART</a>
-                            <a type="button" class="btn btn-outline-warning m-3" onclick="buyNow({{ product.id }}, 'add')">BUY NOW</a>
+                            <a id="add-to-cart" type="button" onclick="updateCart({{ product.id }}, 'add')" class="btn btn-primary m-3"><i class="fas fa-shopping-cart"></i> ADD TO CART</a>
+                            <a type="button" class="btn btn-warning m-3" onclick="buyNow({{ product.id }}, 'add')"><i class="fas fa-bolt"></i> BUY NOW</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-8">
                 <div class="card">
-                    <div class="card-body shadow-sm bg-light">
-                        <div class="ml-5">
+                    <div class="card-body">
+                        <div class="ml-md-5">
                             <div>
-                                <h5>{{ product.product_name }}</h5>
-                                <h3>&#x20B9; {{ product.product_selling_price }}
-                                    <strike class="MRP">&#x20B9; {{ product.product_MRP }}</strike>
-                                    {% if discount > 0 %}
-                                        <small class="discount">{{ discount }}% off</small>
-                                    {% endif %}
-                                </h3>
+
+                                <div>
+                                    <h5>{{ product.product_name }}</h5>
+                                    <h3>&#x20B9; {{ product.product_selling_price }}
+                                        <strike class="MRP">&#x20B9; {{ product.product_MRP }}</strike>
+                                        {% if discount > 0 %}
+                                            <small class="discount">{{ discount }}% off</small>
+                                        {% endif %}
+                                        {% if product.product_stoke < 5 %}
+                                            <small class="few-units">Only {{ product.product_stoke }} left!</small>
+                                        {% endif %}
+                                    </h3>
+                                </div>
+
+                                <hr>
+
+                                <div class="mt-3">
+                                    <p>Available Offers <i class="fas fa-tags"></i></p>
+                                </div>
+
+                                <hr>
+
+                                <div class="delivery-check">
+                                    <div class="form-group row">
+                                        <div class="col-xs-2">
+                                            <label class="grey-text" for="ex1"><i class="fas fa-map-marker-alt fa-circle"></i> Deliver to</label>
+                                            <input class="form-control" name="pincode" maxlength="6" minlength="6" id="pincode_id" type="text" pattern="^[1-9][0-9]{5}$">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                {% if product.product_type.product_type == 'Mobiles' %}
+                                    <div class="row no-gutters">
+                                        <div class="highlight col-12 col-md-2">
+                                            <p class="grey-text">Highlights </p>
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <br>
+                                            <ul class="grey-text">
+                                                <li>{{ details.display_size }} {{ details.display_type }} Display</li>
+                                                <li>{{ details.RAM }} GB RAM</li>
+                                                <li>{{ details.processor_name }} Processor</li>
+                                                <li>{{ details.internal_storage }} GB Storage</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <br>
+                                            <ul class="grey-text">
+                                                <li>{{ details.battery_capacity }} mAh</li>
+                                                <li>{{ details.charger_output }} Charging</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if product.product_type.product_type == 'Laptops' %}
+                                    <div class="row no-gutters">
+                                        <div class="highlight col-12 col-md-2">
+                                            <p class="grey-text">Highlights </p>
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <br>
+                                            <ul class="grey-text">
+                                                <li>{{ details.laptop_type }}</li>
+                                                <li>{{ details.RAM }} GB RAM</li>
+                                                <li>{{ details.processor_name }} Processor</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-12 col-md-5">
+                                            <br>
+                                            <ul class="grey-text">
+                                                <li>{{ details.processor_name }} mAh</li>
+                                                <li>{{ details.charger_output }} Charging</li>
+                                                <li>{{ details.operating_system }}</li>
+                                                <li>{{ details.warranty }} Year Warranty</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+
+                                {% if product.product_type.product_type == 'Shirts' %}
+                                    <div class="row no-gutters">
+                                        <div class="highlight col-12 col-md-2">
+                                            <p class="grey-text">Highlights </p>
+                                        </div>
+                                        <div class="col-12 col-md-10">
+                                            <br>
+                                            <ul class="grey-text">
+                                                <li>Size: {{ details.size }}</li>
+                                                <li>Fitting: {{ details.fitting_type }}</li>
+                                                <li>Fabric: {{ details.fabric }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if product.product_type.product_type == 'Books' %}
+                                    <div class="row no-gutters">
+                                        <div class="highlight col-12 col-md-2">
+                                            <p class="grey-text">Highlights </p>
+                                        </div>
+                                        <div class="col-12 col-md-10">
+                                            <br>
+                                            <ul class="grey-text">
+                                                <li>Genre: {{ details.genre }}</li>
+                                                <li>Author: {{ details.author }}</li>
+                                                <li>Published: {{ details.publication_time|date:'d-M-Y' }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                <hr>
+
+                                <div class="row">
+                                    <div class="highlight col-6 col-md-2">
+                                        <p class="grey-text">Seller</p>
+                                    </div>
+                                    <div class="col-6 col-md-10">
+                                        <p class="text-primary">{{ product.product_shop.shop_name }}</p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
