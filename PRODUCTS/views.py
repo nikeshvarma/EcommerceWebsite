@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.urls import reverse
@@ -11,7 +11,7 @@ from LAPTOP.forms import LaptopDetailUpdateForm
 from PHONES.forms import PhoneDetailsUpdateForm
 from BOOKS.forms import BookDetailsUpdateForm
 from FASHION.forms import ShirtDetailsUpdateForm
-from .models import Product
+from .models import Product, ProductType
 from .forms import ListProductForm, UpdateProductForm
 
 User = get_user_model()
@@ -131,3 +131,9 @@ class ProductDetailUpdateView(UpdateView):
         product = get_object_or_404(Product, pk=self.object.id)
         context['image'] = product.product_home_img
         return context
+
+
+def product_type_filter(request):
+    product_types = list(ProductType.objects.filter(category_id=request.GET.get('pk')).values_list('product_type', 'pk'))
+    print(product_types)
+    return JsonResponse(product_types, safe=False)

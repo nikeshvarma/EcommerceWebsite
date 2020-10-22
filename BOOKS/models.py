@@ -8,7 +8,7 @@ class BookDetails(models.Model):
     publisher = models.CharField(max_length=255)
     genre = models.CharField(max_length=255)
     pages = models.CharField(max_length=6)
-    publication_time = models.DateField(default=timezone.now().date())
+    publication_time = models.DateField(default=timezone.now)
     author = models.CharField(max_length=200)
     about_book = models.TextField()
 

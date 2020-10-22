@@ -35,3 +35,4 @@ class ShirtDetails(models.Model):
 
     class Meta:
         verbose_name_plural = 'Shirts'
+        db_table = 'tbl_shirt_details'

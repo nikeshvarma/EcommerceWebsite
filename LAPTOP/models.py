@@ -34,3 +34,4 @@ class LaptopDetails(models.Model):
 
     class Meta:
         verbose_name_plural = 'Laptop'
+        db_table = 'tbl_laptop_details'

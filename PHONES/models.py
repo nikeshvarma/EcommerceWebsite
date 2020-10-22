@@ -37,3 +37,4 @@ class PhoneDetails(models.Model):
 
     class Meta:
         verbose_name_plural = 'Phones'
+        db_table = 'tbl_phone_details'

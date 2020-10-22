@@ -33,7 +33,7 @@ class Order(models.Model):
         return str(self.order_id)
 
     class Meta:
-        db_table = 'Orders'
+        db_table = 'tbl_orders'
         ordering = ['-order_id']
 
 
@@ -44,6 +44,9 @@ class ProductOrdered(models.Model):
 
     def __str__(self):
         return str(self.order.order_id)
+
+    class Meta:
+        db_table = 'tbl_order_product'
 
 
 class TransactionDetails(models.Model):
@@ -60,3 +63,6 @@ class TransactionDetails(models.Model):
     payment_mode = models.CharField(max_length=200)
     refund_amount = models.CharField(max_length=100)
     transaction_date = models.CharField(max_length=200)
+
+    class Meta:
+        db_table = 'tbl_transaction_details'
