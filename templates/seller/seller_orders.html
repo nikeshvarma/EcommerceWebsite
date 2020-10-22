@@ -68,8 +68,8 @@
                     </td>
                     <td class="text-center">
                         <a href="#" class="anchor-class btn btn-warning my-1 w-75">Generate Invoice</a>
-                        <button type="button" class="btn btn-success my-1 w-75" data-toggle="modal" data-target="#orderStatusModal">Update Order Status</button>
-                        <a href="#" class="anchor-class btn btn-info my-1 w-75">Payment Details</a>
+                        <button type="button" class="btn btn-success my-1 w-75" data-toggle="modal" data-target="#orderStatusModal" onclick="orderId({{ order.order_id }})">Update Order Status</button>
+                        <a href="{% url 'seller_payment' order.order_id %}" class="anchor-class btn btn-info my-1 w-75">Payment Details</a>
                     </td>
                 </tr>
 
@@ -94,16 +94,18 @@
                     <div class="alert alert-danger">
                         This Action Cannot Reverted.
                     </div>
-                    <form>
+                    <form id="orderStatusForm" method="POST" action="{% url 'update_order_status' %}">
+                        {% csrf_token %}
                         <div class="form-group">
                             <label for="order-status-update" class="col-form-label">Order Status:</label>
                             {{ orderStatusForm }}
+                            <input name="order_id" id="order_id_field" value="" hidden>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Update</button>
+                    <button type="submit" form="orderStatusForm" class="btn btn-primary">Update</button>
                 </div>
             </div>
         </div>

@@ -77,6 +77,24 @@
     margin-left: auto;
 }
 
+.fashion-home-img {
+    position: relative;
+    height: 250px;
+    width: content-box;
+    padding: 5px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.book-card-img {
+    position: relative;
+    height: 200px;
+    width: content-box;
+    padding: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 
 .active-link {
     background-color: orangered;
@@ -106,6 +124,7 @@
         padding: 10px;
         margin: 0 auto;
     }
+
 
     .searchbar {
         margin: 0;

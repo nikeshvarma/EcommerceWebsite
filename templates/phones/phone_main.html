@@ -17,15 +17,15 @@
             </div>
             <div class="col-12 mt-3">
                 <div class="row mb-2">
-                    {% for product in object_list %}
+                    {% for details, product in products.items %}
                         <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                             <a href="{% url 'product_detail_page' product.product_type product.product_name product.id %}" class="anchor-class">
                                 <div class="card box-hover-order card-padding">
                                     <img class="home-card-img" src="{{ product.product_home_img.url }}" alt="{{ product.product_name }}">
-                                    <div class="card-body text-center">
+                                    <div class="card-body">
                                         <h6 class="text-overflow">{{ product.product_name }}</h6>
-                                        <p class="text-success">Rs. {{ product.product_selling_price }}</p>
-                                        <p class="text-secondary">{{ product.product_type }}</p>
+                                        <p class="text-success p-0 m-0">Rs. {{ product.product_selling_price }}</p>
+                                        <small class="text-secondary">{{ details.RAM }} GB RAM {{ details.internal_storage }} GB Storage</small>
                                     </div>
                                 </div>
                             </a>

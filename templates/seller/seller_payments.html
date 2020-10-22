@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block title %}
-    <title>Products Inventory</title>
+    <title>Payment Summary</title>
 {% endblock title %}
 
 
@@ -24,28 +24,105 @@
         </div>
         <div class="card-body">
             <div class="col-12">
+                <table width="100%" class="table-bordered" cellpadding="10" cellspacing="10">
+                    <tbody>
 
+                    <tr>
+                        <td>
+                            ORDER ID
+                        </td>
+                        <td>
+                            {{ transaction.order.order_id }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            TRANSACTION ID
+                        </td>
+                        <td>
+                            {{ transaction.transaction_id }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            TRANSACTION DATE
+                        </td>
+                        <td>
+                            {{ transaction.transaction_date }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            BANK TRANSACTION ID
+                        </td>
+                        <td>
+                            {{ transaction.bank_transaction_id }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            TRANSACTION AMOUNT
+                        </td>
+                        <td>
+                            &#x20B9; {{ transaction.transaction_amount }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            TRANSACTION STATUS
+                        </td>
+                        <td>
+                            {{ transaction.transaction_status }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            TRANSACTION TYPE
+                        </td>
+                        <td>
+                            {{ transaction.transaction_type }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            BANK NAME
+                        </td>
+                        <td>
+                            {{ transaction.bank_name }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            PAYMENT MODE
+                        </td>
+                        <td>
+                            {{ transaction.payment_mode }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            REFUND AMOUNT
+                        </td>
+                        <td>
+                            &#x20B9; {{ transaction.refund_amount }}
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-    </div>
 {% endblock content %}
 
 {% block footer %}

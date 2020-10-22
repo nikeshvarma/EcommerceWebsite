@@ -8,5 +8,5 @@ class OrderStatusForm(forms.ModelForm):
         fields = ['order_status']
 
         widgets = {
-            'order_status': forms.Select(attrs={'class': 'form-control'})
+            'order_status': forms.Select(attrs={'class': 'form-control'}),
         }

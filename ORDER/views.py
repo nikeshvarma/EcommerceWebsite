@@ -3,17 +3,17 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render, redirect
+from django.db import transaction
 from django.db.models import F
-
 from PRODUCTS.models import Product
 from USER.models import UserCart
 from . import Checksum
-
 from .models import Order, TransactionDetails, ProductOrdered
 from .utils import VerifyPaytmResponse
 
 
 @login_required()
+@transaction.atomic()
 def payment_request(request):
     email = request.user.email
     amount = request.POST.get('amount')
@@ -79,6 +79,7 @@ def payment_request(request):
 
 
 @csrf_exempt
+@transaction.atomic()
 def payment_status(request):
     resp = VerifyPaytmResponse(request)
     if resp['verified']:

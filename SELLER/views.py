@@ -1,14 +1,15 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, TemplateView, UpdateView, ListView
+from django.views.generic import CreateView, TemplateView, ListView
 from django.contrib.auth import get_user_model
 
 from ORDER.models import Order, ProductOrdered
 from ORDER.forms import OrderStatusForm
 from PRODUCTS.models import Product
 from .models import Shop
+from ORDER.models import TransactionDetails
 from .forms import SellerRegisterForm, BankDetailsForm
 
 User = get_user_model()
@@ -91,3 +92,16 @@ class SellerOrdersView(ListView):
 @method_decorator([login_required, user_passes_test(lambda u: u.is_seller, login_url='/seller/register-shop/')], name='dispatch')
 class SellerPaymentView(TemplateView):
     template_name = 'seller/seller_payments.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SellerPaymentView, self).get_context_data()
+        context['transaction'] = TransactionDetails.objects.get(order_id=kwargs['order_id'])
+        return context
+
+
+@login_required
+def update_order_status(request):
+    postForm = OrderStatusForm(request.POST, instance=Order.objects.get(pk=request.POST.get('order_id')))
+    if postForm.is_valid():
+        postForm.save()
+    return redirect('seller_orders')

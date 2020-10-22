@@ -11,7 +11,7 @@ class Order(models.Model):
         ('Approved', 'Approved'),
         ('Packed', 'Packed'),
         ('Dispatched', 'Dispatched'),
-        ('Deliver', 'Deliver'),
+        ('Delivered', 'Delivered'),
         ('Canceled', 'Canceled'),
         ('Failed', 'Failed'),
     ]
