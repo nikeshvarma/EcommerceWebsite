@@ -17,3 +17,4 @@ class BookDetails(models.Model):
 
     class Meta:
         verbose_name_plural = 'Books'
+        db_table = 'tbl_book_details'
