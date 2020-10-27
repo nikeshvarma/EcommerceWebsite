@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic import TemplateView, DetailView, ListView, FormView
 from django.db.models import Q
 
 from BOOKS.models import BookDetails
@@ -94,7 +95,3 @@ class CheckOutView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'home/about.html'
-
-
-class ContactView(TemplateView):
-    template_name = 'home/contact.html'

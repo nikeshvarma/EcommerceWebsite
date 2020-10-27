@@ -1,0 +1,5 @@
+{% autoescape off %}
+    Welcome to OnlineStore.com,
+    Please click on the link to verify your email and activate your account,
+    http://{{ domain }}{% url 'activate_account' uidb64=uid token=token %}
+{% endautoescape %}

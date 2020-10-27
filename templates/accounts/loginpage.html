@@ -23,24 +23,28 @@
 
     {% if next %}
         {% if user.is_authenticated %}
-            <p>Your account doesn't have access to this page. To proceed,
+            <p class="alert alert-danger">Your account doesn't have access to this page. To proceed,
                 please login with an account that has access.</p>
         {% else %}
-            <p>Please login to see this page.</p>
+            <p class="alert alert-warning">Please login to see this page.</p>
         {% endif %}
     {% endif %}
 
     <div>
         <div class="login-box">
             <div class="LoginForm">
-                <form method="POST" action="{% url 'login_page' %}">
-                    <h3 align="center" class="bg-secondary p-2 text-light">Login</h3>
-                    {% csrf_token %}
-                    <label class="col-form-label">Email</label><br>
-                    {{ form.username|add_class:'form-control' }}
-                    <label class="col-form-label">Password</label><br>
-                    {{ form.password|add_class:'form-control' }}
-                    <button type="submit" class="mt-5 mb-1 btn btn-success new_account">Login</button>
+                {% if next %}
+                    <form method="POST" action="{% url 'login_page' %}?next={{ next }}">
+                {% else %}
+                    <form method="POST" action="{% url 'login_page' %}">
+                {% endif %}
+                <h3 align="center" class="bg-secondary p-2 text-light">Login</h3>
+                {% csrf_token %}
+                <label class="col-form-label">Email</label><br>
+                {{ form.username|add_class:'form-control' }}
+                <label class="col-form-label">Password</label><br>
+                {{ form.password|add_class:'form-control' }}
+                <button type="submit" class="mt-5 mb-1 btn btn-success new_account">Login</button>
                 </form>
                 <a class="btn btn-info new_account text-white mt-2 mb-1" href="{% url 'signup_page' %}">Create New Account</a>
                 <br>
