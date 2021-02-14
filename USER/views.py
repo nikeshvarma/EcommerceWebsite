@@ -32,7 +32,6 @@ class OrderDetailView(DetailView):
         context = super(OrderDetailView, self).get_context_data()
         product = ProductOrdered.objects.get(order_id=self.kwargs['order_id'])
         context['products'] = product.product
-
         return context
 
 
@@ -42,7 +41,7 @@ class OrderView(TemplateView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(OrderView, self).get_context_data()
-        orders = {Product.objects.get(order__order_id=x.order_id): [x.order_status, x.order_id] for x in Order.objects.filter(user=self.request.user)}
+        orders = {Product.objects.filter(order__order_id=x.order_id): [x.order_status, x.order_id] for x in Order.objects.filter(user=self.request.user)}
         context['products'] = orders
         return context
 

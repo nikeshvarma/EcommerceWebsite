@@ -16,7 +16,7 @@ class Order(models.Model):
         ('Failed', 'Failed'),
     ]
 
-    order_id = models.BigAutoField(primary_key=True, unique=True, verbose_name='order_id')
+    order_id = models.AutoField(primary_key=True, unique=True, verbose_name='order_id')
     user = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'is_seller': False})
     product = models.ManyToManyField(Product, through='ProductOrdered')
     name = models.CharField(max_length=200)

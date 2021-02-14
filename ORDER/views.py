@@ -10,6 +10,12 @@ from USER.models import UserCart
 from . import Checksum
 from .models import Order, TransactionDetails, ProductOrdered
 from .utils import VerifyPaytmResponse
+import random
+import string
+
+
+def order_id_generator(size=10, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 
 @login_required()

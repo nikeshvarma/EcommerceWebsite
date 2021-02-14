@@ -111,8 +111,8 @@ LOGIN_REDIRECT_URL = '/'
 PAYTM_COMPANY_NAME = "OnlineStore.com"  # For representation purposes
 PAYTM_INDUSTRY_TYPE_ID = "Retail"  # For staging environment
 PAYTM_CHANNEL_ID = "WEB"
-PAYTM_MERCHANT_KEY = "PAYTM_MERCHANT_KEY"
-PAYTM_MERCHANT_ID = "PAYTM_MERCHANT_ID"
+PAYTM_MERCHANT_KEY = "N&dcG8knGh@AU307"
+PAYTM_MERCHANT_ID = "wuozEn97922111650508"
 PAYTM_CALLBACK_URL = "http://localhost:8000/orders/payment-validation/"
 PAYTM_WEBSITE = "WEBSTAGING"
 PAYTM_PAYMENT_GATEWAY_URL = "https://securegw-stage.paytm.in/order/process"
@@ -123,8 +123,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'EMAIL_HOST_USER'
-EMAIL_HOST_PASSWORD = 'EMAIL_HOST_PASSWORD'
+EMAIL_HOST_USER = 'helponlinestore2020@gmail.com'
+EMAIL_HOST_PASSWORD = 'store@123'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

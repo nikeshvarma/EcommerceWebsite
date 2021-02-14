@@ -20,14 +20,14 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-4 col-md-2 text-center">
-                                            <img class="order-image" src="{{ item.product_home_img.url }}" alt="{{ item.product_name }}">
+                                            <img class="order-image" src="{{ item.0.product_home_img.url }}" alt="{{ item.0.product_name }}">
                                         </div>
                                         <div class="col-6 col-md-3 text-xs-center">
                                             <p>{{ item.product_name }}</p>
-                                            <small>Seller: {{ item.product_shop.shop_name }}</small>
+                                            <small>Seller: {{ item.0.product_shop.shop_name }}</small>
                                         </div>
                                         <div class="col-2 col-md-2">
-                                            <p> &#8377; {{ item.product_selling_price }}</p>
+                                            <p> &#8377; {{ item.0.product_selling_price }}</p>
                                         </div>
                                         <div class="col-12 col-md-5">
                                             <p>Order Status: {{ status.0 }}</p>
